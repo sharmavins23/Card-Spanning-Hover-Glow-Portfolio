@@ -10,6 +10,7 @@ html {
 
     --transition-time: 400ms;
 
+    /* Card sizing */
     --card-width: 30vw;
     --card-height: 35vh;
 
