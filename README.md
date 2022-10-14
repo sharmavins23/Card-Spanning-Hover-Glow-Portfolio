@@ -1,7 +1,7 @@
 # Card Spanning Hover Glow
 
 This is a small implementation of an on-hover glow effect on multiple cards that
-persists across cards.
+persists across cards, extended to a portfolio mockup.
 
 Credit to [this video](https://www.youtube.com/watch?v=htGfnF1zN4g) for the
 implementation.
