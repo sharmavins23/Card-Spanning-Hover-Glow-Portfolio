@@ -3,7 +3,12 @@ html {
     --card-bg-color: rgba(255, 255, 255, 0.1);
     --card-color: rgb(25, 22, 25);
     --border-color: rgba(255, 255, 255, 0.1);
+
+    --text-color-hover: #c8cae1;
     --text-color: rgb(101, 101, 124);
+    --text-color2: rgb(81, 81, 104);
+
+    --transition-time: 400ms;
 
     --card-width: 30vw;
     --card-height: 35vh;
@@ -15,6 +20,11 @@ html {
     --purple: rgb(123, 31, 162);
     --violet: rgb(103, 58, 183);
     --pink: rgb(244, 143, 177);
+
+    --svg-no-hover: invert(42%) sepia(24%) saturate(353%) hue-rotate(201deg)
+        brightness(87%) contrast(85%);
+    --svg-hover: invert(90%) sepia(11%) saturate(947%) hue-rotate(194deg)
+        brightness(92%) contrast(89%);
 }
 
 @keyframes background-pan {
@@ -84,7 +94,7 @@ span.magic {
     display: inline-block;
     position: relative;
 
-    animation: background-pan 2.5s linear infinite;
+    animation: background-pan 2s linear infinite;
     background: linear-gradient(
         to right,
         var(--purple),
@@ -111,17 +121,16 @@ section#contact {
 }
 
 img.icon {
+    transition: filter var(--transition-time) ease;
     width: 50px;
-    filter: invert(42%) sepia(24%) saturate(353%) hue-rotate(201deg)
-        brightness(87%) contrast(85%);
+    filter: var(--svg-no-hover);
 }
 
 img.link-icon:hover {
     transition: filter var(--transition-time) ease;
     transition: transform var(--transition-time) ease;
     transform: scale(1.2, 1.2);
-    filter: invert(90%) sepia(11%) saturate(947%) hue-rotate(194deg)
-        brightness(92%) contrast(89%);
+    filter: var(--svg-hover);
 }
 
 img.link-icon {
@@ -215,6 +224,89 @@ div#cards {
     height: calc(100% - 2px);
     width: calc(100% - 2px);
 
-    position: relative;
+    position: absolute;
+    top: 0px;
+    left: 0px;
     z-index: 2;
+}
+
+.card > .card-content > article {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.card > .card-content > article > .card-icon-holder {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.card > .card-content > article > .card-icon-holder > img.card-icon {
+    width: 100px;
+    align-items: center;
+    transition: filter var(--transition-time) ease;
+    filter: var(--svg-no-hover);
+}
+
+.card:hover > .card-content > article > .card-icon-holder > img.card-icon {
+    transition: filter var(--transition-time) ease;
+    filter: var(--svg-hover);
+}
+
+.card > .card-content > article > h1 {
+    margin: 0px;
+    font-family: "Roboto Mono";
+    font-size: 2rem;
+    transition: color var(--transition-time) ease;
+    color: var(--text-color);
+    text-transform: uppercase;
+    padding-top: 1rem;
+}
+
+.card:hover > .card-content > article > h1 {
+    transition: color var(--transition-time) ease;
+    animation: background-pan 2s linear infinite;
+    background: linear-gradient(
+        to right,
+        var(--purple),
+        var(--violet),
+        var(--pink),
+        var(--purple)
+    );
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card > .card-content > article > h2 {
+    margin: 0px;
+    font-family: "Roboto Mono";
+    font-size: 1.5rem;
+
+    color: var(--text-color2);
+    transition: color var(--transition-time) ease;
+
+    text-transform: uppercase;
+    padding-top: 0.5rem;
+    font-style: italic;
+}
+
+.card:hover > .card-content > article > h2 {
+    transition: color var(--transition-time) ease;
+    color: var(--text-color-hover);
+}
+
+.card > .card-content > article > p {
+    margin: 0px;
+    font-family: "Roboto Mono";
+    font-size: 1rem;
+    color: var(--text-color);
+    padding-top: 0.5rem;
 }
