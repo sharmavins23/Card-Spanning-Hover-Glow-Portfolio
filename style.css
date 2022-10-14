@@ -1,0 +1,220 @@
+html {
+    --bg-color: rgb(23, 20, 23);
+    --card-bg-color: rgba(255, 255, 255, 0.1);
+    --card-color: rgb(25, 22, 25);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-color: rgb(101, 101, 124);
+
+    --card-width: 30vw;
+    --card-height: 35vh;
+
+    --gradient-size: 90vw;
+    --gradient-border-size: 45vw;
+
+    /* For magic text */
+    --purple: rgb(123, 31, 162);
+    --violet: rgb(103, 58, 183);
+    --pink: rgb(244, 143, 177);
+}
+
+@keyframes background-pan {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: -200% center;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+header {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 50px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+header > section#me {
+    flex-basis: calc(100% * (4 / 6));
+    padding-left: 1.5rem;
+
+    display: flex;
+    align-items: center;
+}
+
+section.header-section#links,
+section.header-section#contact {
+    flex-basis: calc(100% * (1 / 6));
+    height: 100%;
+    border-left: 1px solid var(--border-color);
+    justify-content: space-evenly;
+
+    display: flex;
+    align-items: center;
+}
+
+span.magic {
+    font-family: "Roboto", sans-serif;
+    font-size: 2rem;
+    font-weight: 1000;
+    text-transform: uppercase;
+
+    display: inline-block;
+    position: relative;
+
+    animation: background-pan 2.5s linear infinite;
+    background: linear-gradient(
+        to right,
+        var(--purple),
+        var(--violet),
+        var(--pink),
+        var(--purple)
+    );
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+section#me > span.magic {
+    padding-left: 1.5rem;
+}
+
+section#contact {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+img.icon {
+    width: 50px;
+    filter: invert(42%) sepia(24%) saturate(353%) hue-rotate(201deg)
+        brightness(87%) contrast(85%);
+}
+
+img.link-icon:hover {
+    transition: filter var(--transition-time) ease;
+    transition: transform var(--transition-time) ease;
+    transform: scale(1.2, 1.2);
+    filter: invert(90%) sepia(11%) saturate(947%) hue-rotate(194deg)
+        brightness(92%) contrast(89%);
+}
+
+img.link-icon {
+    transition: filter var(--transition-time) ease;
+    transition: transform var(--transition-time) ease;
+    width: 40px;
+    transform: scale(1, 1);
+    filter: invert(42%) sepia(24%) saturate(353%) hue-rotate(201deg)
+        brightness(87%) contrast(85%);
+}
+
+section.header-section a {
+    text-decoration: none;
+}
+
+div#cards {
+    height: calc((var(--card-height) * 2) + 20px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    height: var(--card-height);
+    width: var(--card-width);
+    border-radius: 15px;
+    cursor: pointer;
+
+    position: relative;
+}
+
+.card::before {
+    border-radius: inherit;
+    content: "";
+
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    background: radial-gradient(
+        var(--gradient-size) circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.06),
+        transparent 40%
+    );
+    z-index: 3;
+
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.card::after {
+    border-radius: inherit;
+    content: "";
+
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    background: radial-gradient(
+        var(--gradient-border-size) circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.3),
+        transparent 40%
+    );
+    z-index: 1;
+
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+#cards:hover > .card::after {
+    opacity: 1;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card > .card-content {
+    background-color: var(--card-color);
+    border-radius: inherit;
+    margin: 1px;
+    height: calc(100% - 2px);
+    width: calc(100% - 2px);
+
+    position: relative;
+    z-index: 2;
+}
