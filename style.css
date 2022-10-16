@@ -11,8 +11,9 @@ html {
     --transition-time: 400ms;
 
     /* Card sizing */
-    --card-width: 30vw;
-    --card-height: 35vh;
+    --text-size: 1vw;
+    --card-width: clamp(570px, 30vw, 768px);
+    --card-height: clamp(330px, 35vh, 460px);
 
     --gradient-size: 90vw;
     --gradient-border-size: 45vw;
